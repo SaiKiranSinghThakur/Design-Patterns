@@ -1,4 +1,4 @@
-package factorymethod;
+package creational.factorymethod;
 
 enum Burgers {
 	CHEESE,

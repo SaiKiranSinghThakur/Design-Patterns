@@ -1,4 +1,4 @@
-package factorymethod;
+package creational.factorymethod;
 
 public class VeganBurger extends Burger {
 
