@@ -1,4 +1,4 @@
-package simplefactorymethod;
+package creational.simplefactorymethod;
 
 public class VeganBurger implements Burger {
 

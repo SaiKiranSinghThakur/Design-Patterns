@@ -1,4 +1,4 @@
-package simplefactorymethod;
+package creational.simplefactorymethod;
 
 abstract class BurgerStore {
 	// Factory Method

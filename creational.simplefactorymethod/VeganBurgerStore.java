@@ -1,4 +1,4 @@
-package simplefactorymethod;
+package creational.simplefactorymethod;
 
 public class VeganBurgerStore extends BurgerStore {
 
