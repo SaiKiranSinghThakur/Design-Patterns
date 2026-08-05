@@ -1221,6 +1221,9 @@ These are the questions most commonly asked in Java backend interviews for candi
 ### Builder
 The Builder Pattern is a creational design pattern that separates the construction of a complex object from its representation, allowing you to build different representations step by step using the same building process.
 
+Yes, **Lombok** is the library, and **`@Builder` is one of the annotations provided by Lombok**—if you only used annotations like `@Getter`, `@Setter`, `@Data`, `@NoArgsConstructor`, or `@AllArgsConstructor`, then don't say you used `@Builder` in your interview.
+
+
 ### Prototype
 The Prototype Pattern is a creational design pattern that allows you to create new objects by copying an existing object (called a prototype), rather than instantiating new ones from scratch — useful when object creation is expensive or complex.
 
