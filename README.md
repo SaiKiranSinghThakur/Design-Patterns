@@ -7,6 +7,641 @@
 ### Factory Method
 The Factory Method design pattern is a creational pattern that provides an interface or abstract class for creating objects, but lets subclasses decide which class to instantiate, allowing the code to be more flexible and easier to maintain.
 
+Excellent. The **Factory Design Pattern** is one of the **top 3 most frequently asked design patterns** in Java interviews, especially for **4+ years of experience**.
+
+We'll cover:
+
+* ✅ Concept
+* ✅ Why Factory Pattern was introduced
+* ✅ Problem it solves
+* ✅ Real-time examples
+* ✅ Complete Java implementation
+* ✅ Spring Boot usage
+* ✅ Advantages & Disadvantages
+* ✅ Factory vs Singleton
+* ✅ Factory vs Builder
+* ✅ Interview Questions
+* ✅ Coding Problems
+
+---
+
+# Factory Design Pattern ⭐⭐⭐⭐⭐
+
+# 1. What is Factory Pattern?
+
+### Interview Answer
+
+> The Factory Design Pattern is a creational design pattern that provides an interface or method for creating objects without exposing the object creation logic to the client. The Factory decides which object to create based on the input.
+
+---
+
+# 2. Why was Factory Pattern introduced?
+
+Suppose we have different payment methods.
+
+Without Factory
+
+```java
+Payment payment;
+
+if(type.equals("CreditCard")){
+
+    payment = new CreditCard();
+
+}
+else if(type.equals("UPI")){
+
+    payment = new UPI();
+
+}
+else{
+
+    payment = new PayPal();
+
+}
+```
+
+Problems
+
+* Too many if-else statements
+* Client knows every implementation class
+* Difficult to add new payment methods
+* Violates Open/Closed Principle
+
+Factory solves this.
+
+---
+
+# 3. Real-Time Example
+
+Think of a restaurant.
+
+You order
+
+```
+Pizza
+```
+
+You don't prepare it yourself.
+
+Kitchen (Factory)
+
+↓
+
+Creates Pizza
+
+↓
+
+Returns Pizza
+
+Similarly,
+
+Client
+
+↓
+
+Factory
+
+↓
+
+Creates required object
+
+↓
+
+Returns object
+
+---
+
+# 4. Components
+
+There are four parts.
+
+```
+Product Interface
+
+↓
+
+Concrete Products
+
+↓
+
+Factory Class
+
+↓
+
+Client
+```
+
+---
+
+# Example
+
+```
+Vehicle
+
+↓
+
+Car
+
+Bike
+
+Truck
+
+↓
+
+VehicleFactory
+
+↓
+
+Client
+```
+
+---
+
+# 5. Without Factory
+
+```java
+Car car = new Car();
+
+car.drive();
+```
+
+Tomorrow
+
+```
+Bike
+
+Truck
+
+Bus
+```
+
+Client code changes.
+
+Not good.
+
+---
+
+# 6. With Factory
+
+Step 1
+
+Create interface
+
+```java
+interface Vehicle{
+
+    void drive();
+
+}
+```
+
+---
+
+Step 2
+
+Concrete Classes
+
+```java
+class Car implements Vehicle{
+
+    public void drive(){
+
+        System.out.println("Driving Car");
+
+    }
+
+}
+```
+
+```java
+class Bike implements Vehicle{
+
+    public void drive(){
+
+        System.out.println("Driving Bike");
+
+    }
+
+}
+```
+
+---
+
+Step 3
+
+Factory Class
+
+```java
+class VehicleFactory{
+
+    public static Vehicle getVehicle(String type){
+
+        if(type.equalsIgnoreCase("Car")){
+
+            return new Car();
+
+        }
+
+        else if(type.equalsIgnoreCase("Bike")){
+
+            return new Bike();
+
+        }
+
+        return null;
+
+    }
+
+}
+```
+
+---
+
+Step 4
+
+Client
+
+```java
+public class Main{
+
+    public static void main(String args[]){
+
+        Vehicle vehicle =
+        VehicleFactory.getVehicle("Car");
+
+        vehicle.drive();
+
+    }
+
+}
+```
+
+Output
+
+```
+Driving Car
+```
+
+---
+
+# How does it work?
+
+```
+Client
+
+↓
+
+VehicleFactory.getVehicle("Car")
+
+↓
+
+Factory creates Car
+
+↓
+
+Returns Vehicle
+
+↓
+
+drive()
+```
+
+Client doesn't know
+
+```
+new Car()
+```
+
+---
+
+# 7. Why use Factory?
+
+Advantages
+
+* Hides object creation
+* Loose coupling
+* Easier maintenance
+* Easy to extend
+* Follows Open/Closed Principle
+
+---
+
+# 8. Real-Time Examples
+
+Interview Answer
+
+Factory Pattern is commonly used in
+
+* JDBC DriverManager
+* LoggerFactory
+* Calendar.getInstance()
+* Spring BeanFactory
+* Spring ApplicationContext
+
+---
+
+# 9. Spring Boot Example ⭐⭐⭐⭐⭐
+
+Very common interview question.
+
+```java
+ApplicationContext context =
+new AnnotationConfigApplicationContext(AppConfig.class);
+
+EmployeeService service =
+context.getBean(EmployeeService.class);
+```
+
+Who creates the object?
+
+```
+Spring Container
+
+↓
+
+Factory
+```
+
+Spring internally uses Factory Pattern.
+
+---
+
+# 10. Advantages
+
+* Loose coupling
+* Reusable
+* Better maintenance
+* Cleaner client code
+* Easy to add new classes
+
+---
+
+# 11. Disadvantages
+
+* More classes
+* Slightly more complex
+* Factory must be updated if implemented using if-else (simple factory)
+
+---
+
+# 12. Factory vs Singleton ⭐⭐⭐⭐⭐
+
+| Factory                    | Singleton                    |
+| -------------------------- | ---------------------------- |
+| Creates objects            | Restricts object creation    |
+| Can create many objects    | Only one object              |
+| Focuses on object creation | Focuses on object uniqueness |
+
+---
+
+# 13. Factory vs Builder ⭐⭐⭐⭐⭐
+
+Factory
+
+```
+Creates ONE object.
+
+```
+
+Builder
+
+```
+Builds COMPLEX object
+
+step by step.
+```
+
+Example
+
+Factory
+
+```
+Vehicle
+
+↓
+
+Car
+```
+
+Builder
+
+```
+Computer
+
+↓
+
+CPU
+
+↓
+
+RAM
+
+↓
+
+SSD
+
+↓
+
+Graphics Card
+
+↓
+
+Final Object
+```
+
+---
+
+# 14. Factory vs new Keyword
+
+Without Factory
+
+```java
+Vehicle v = new Car();
+```
+
+Client knows implementation.
+
+With Factory
+
+```java
+Vehicle v =
+VehicleFactory.getVehicle("Car");
+```
+
+Client doesn't know implementation.
+
+---
+
+# Interview Questions
+
+## What is Factory Pattern?
+
+### Answer
+
+Factory Pattern is a creational design pattern that encapsulates object creation logic and returns objects without exposing the creation process to the client.
+
+---
+
+## Why was Factory introduced?
+
+### Answer
+
+To reduce tight coupling, hide object creation, improve maintainability, and make the application easier to extend.
+
+---
+
+## What problem does Factory solve?
+
+### Answer
+
+It removes object creation logic from client code and centralizes it in one place.
+
+---
+
+## What are the components?
+
+* Product Interface
+* Concrete Products
+* Factory
+* Client
+
+---
+
+## Why use interface?
+
+### Answer
+
+The client should depend on an abstraction rather than a concrete implementation.
+
+---
+
+## Where have you used Factory?
+
+### Answer
+
+Spring's `ApplicationContext`, `BeanFactory`, JDBC `DriverManager`, and logging frameworks use Factory Pattern.
+
+---
+
+## Difference between Factory and Singleton?
+
+Factory creates objects.
+
+Singleton ensures only one object exists.
+
+---
+
+## Difference between Factory and Builder?
+
+Factory creates an object in one step.
+
+Builder creates a complex object step by step.
+
+---
+
+## Can Factory create Singleton objects?
+
+### Answer
+
+Yes.
+
+A Factory can return the same Singleton instance instead of creating a new one.
+
+---
+
+## Coding Problems
+
+### Problem 1
+
+Create
+
+```
+Animal
+
+↓
+
+Dog
+
+Cat
+
+↓
+
+AnimalFactory
+```
+
+---
+
+### Problem 2
+
+Create
+
+```
+Payment
+
+↓
+
+CreditCard
+
+UPI
+
+NetBanking
+
+↓
+
+PaymentFactory
+```
+
+---
+
+### Problem 3
+
+Create
+
+```
+Notification
+
+↓
+
+Email
+
+SMS
+
+Push Notification
+
+↓
+
+NotificationFactory
+```
+
+---
+
+# ⭐ Most Asked Interview Questions (4+ Years)
+
+Be prepared to answer:
+
+1. What is Factory Pattern?
+2. Why was it introduced?
+3. What problem does it solve?
+4. Explain the flow of Factory Pattern.
+5. Advantages and disadvantages.
+6. Factory vs Singleton.
+7. Factory vs Builder.
+8. Real-world examples.
+9. How does Spring Boot use Factory Pattern?
+10. Implement a Factory Pattern in Java.
+
+---
+
+## 🎯 Interview Tip (4+ Years)
+
+If asked **"Have you used Factory Pattern in your projects?"**, a strong answer is:
+
+> "Yes. Although I didn't write a custom Factory class for business objects, I worked extensively with Spring Boot, where the IoC container uses Factory Pattern internally to create and manage beans. I also used APIs like `ApplicationContext.getBean()` and JDBC's `DriverManager`, which are common examples of the Factory Pattern."
+
+This is a realistic and credible answer for someone with your level of experience.
+
+
 ### Singleton
 
 Excellent. **Singleton** is the **#1 most asked Design Pattern** in Java interviews (especially banking, fintech, and product companies). For a **4+ years Java Developer**, you should be able to explain the concept, write the code, discuss thread safety, and answer follow-up questions.
